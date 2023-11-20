@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="assets/css/bootstrap.css">
+
+  <link rel="icon" href="favicon.png" type="image/png" />
+  <title>Rental Mobil</title>
+  <style>
+    body {
+      margin-bottom: 50px;
+    }
+
+    .nav-link {
+      font-weight: bold;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 15px;
+    }
+
+    .card-title {
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .card-text {
+      font-weight: lighter;
+      text-align: center;
+    }
+
+    .card-group {
+      gap: 10px;
+      max-width: 400px;
+      padding: 5px;
+      margin-top: 2px;
+
+    }
+
+    [class*="card-group"] {
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- Image and text -->
+    <a class="navbar-brand" href="#"
+      style="font-weight: bold; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+      <img src="images/car.png" width="30" height="30" class="d-inline-block align-top" alt="">
+      RentalMobil
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="peminjaman.html">Peminjaman</a>
+        </li>
+        <li class="nav-item"><a class="nav-link active" href="#">Daftar Mobil</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+    <h1 class="display-4"
+      style="font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;font-weight:bold; text-align: center; margin-top: 40px;">
+      Mobil
+      yang Tersedia</h1>
+    <p class="lead" style="text-align: center;">Mobil yang tersedia di RentalMobil</p>
+
+    <div class="content pt-2">
+      <div class="container-fluid">
+        <button class="btn btn-primary mb-3" data-toggle="modal" data-target="#Tambah">
+          Tambah data
+        </button>
+
+        <div class="container">
+          <div id="cardContent" class="mb-5 row">
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Edit-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="close"><span
+                aria-hidden="true">&times;</span></button>
+          </div>
+          <div class="modal-body">
+            <form action="">
+              <div class="mb-3">
+                <input type="hidden" id="id" />
+                <label for="name">Merk Mobil</label>
+                <input type="text" class="form-control" id="name" aria-describedby="emailHelp" required />
+              </div>
+              <div class="mb-3">
+                <label for="kapasitas" class="form-label">Kapasitas Mobil</label>
+                <textarea class="form-control" id="kapasitas" rows=""></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="harga" class="form-label">Harga Rental </label>
+                <input type="number" class="form-control" id="harga" aria-describedby="emailHelp" min="0" required />
+              </div>
+              <div class="mb-3">
+                <label for="status" class="form-label">status</label>
+                <select class="form-select" aria-label="Default select example" id="status">
+                  <option selected>available</option>
+                  <option>not available</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="image" class="form-label">Gambar</label>
+                <input class="form-control" type="file" id="image" accept="image/png, image/jpeg" />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+              Close
+            </button>
+            <button type="button" class="btn btn-primary" onclick="saveEditData()">
+              Save changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tambah -->
+    <div class="modal fade" id="Tambah" tabindex="-1" aria-labelledby="labelTambah" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="labelTambah">Tambah Data Mobil</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="">
+              <div class="mb-3">
+                <label for="name" class="form-label">Merk Mobil</label>
+                <input type="text" class="form-control" id="nameTambah" aria-describedby="emailHelp" required />
+              </div>
+              <div class="mb-3">
+                <label for="kapasitas" class="form-label">Kapasitas</label>
+                <textarea class="form-control" id="kapasitasTambah" rows="3"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="harga" class="form-label">Harga Rental</label>
+                <input type="number" class="form-control" id="hargaTambah" aria-describedby="emailHelp" min="0"
+                  required />
+              </div>
+              <div class="mb-3">
+                <label for="status" class="form-label">Status</label>
+                <select class="form-select" aria-label="Default select example" id="statusTambah">
+                  <option selected>available</option>
+                  <option>Not Available</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="image" class="form-label">Gambar</label>
+                <input class="form-control" type="file" id="imageTambah" accept="image/png, image/jpeg" />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+              Close
+            </button>
+            <button type="button" class="btn btn-primary" onclick="saveNewData()">
+              Save changes
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var db;
+
+      var request = indexedDB.open("imageDatabase", 1);
+
+      request.onupgradeneeded = (event) => {
+        db = event.target.result;
+        var objectStore = db.createObjectStore("images", {
+          keyPath: "id",
+          autoIncrement: true,
+        });
+      };
+
+      request.onsuccess = (event) => {
+        db = event.target.result;
+      };
+
+      request.onerror = (event) => { };
+
+      function getImage(id) {
+        return new Promise(async (resolve, reject) => {
+          //await db open
+          while (!db) {
+            await new Promise((resolve) => setTimeout(resolve, 100));
+          }
+          var transaction = db.transaction("images", "readwrite");
+          var objectStore = transaction.objectStore("images");
+
+          let request = objectStore.get(id);
+
+          request.onsuccess = (event) => {
+            resolve(event.target.result);
+          };
+
+          request.onerror = (event) => {
+            reject(new Error("Error getting image from database"));
+          };
+        });
+      }
+
+      function uploadedFile(image) {
+        return new Promise((resolve, reject) => {
+          var transaction = db.transaction("images", "readwrite");
+          var objectStore = transaction.objectStore("images");
+          var reader = new FileReader();
+
+          reader.onload = function (event) {
+            var result = event.target.result;
+
+            // Open a new transaction inside the onload event
+            var newTransaction = db.transaction("images", "readwrite");
+            var newObjectStore = newTransaction.objectStore("images");
+
+            var request = newObjectStore.add({ image: result });
+
+            request.onsuccess = function (event) {
+              // alert("Gambar .");
+              resolve(event.target.result); // Resolve Promise dengan id
+            };
+
+            request.onerror = function (event) {
+              alert(
+                "Gagal Menyimpan data gambar ke database, silahkan coba lagi "
+              );
+              reject(new Error("Error adding image to the database"));
+            };
+          };
+
+          reader.readAsDataURL(image);
+        });
+      }
+
+      function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      }
+
+      function showData(ignoreAlert = false) {
+        let dataMobil = localStorage.getItem("dataMobil");
+        if (dataMobil == null && !ignoreAlert) {
+          alert("Data Mobil Kosong");
+          return;
+        }
+
+        dataMobil = JSON.parse(dataMobil);
+
+        let cardContent = "";
+
+        if (dataMobil.data.length == 0) {
+          document.getElementById("cardContent").innerHTML = cardContent;
+          alert("Data Mobil Kosong");
+          return;
+        }
+
+        dataMobil.data.forEach((mobil) => {
+          const status =
+            mobil.status == "available"
+              ? "style='color: green;'"
+              : "style='color: red;'";
+
+          //get image from indexedDB by id
+          if (Number.isInteger(mobil.image)) {
+            const image = getImage(mobil.image).then((image) => {
+              mobil.image = image.image;
+              cardContent += `
+              
+           
+      <div class="col">
+          <div class="card h-100" style="width: 18rem;">
+            <img src="${mobil.image}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">${mobil.name}</h5>
+              <p class="card-text">${mobil.kapasitas}</p>
+              Status : <a ${status}>${mobil.status}</a> <br/>
+              Harga Rental :Rp. ${numberWithCommas(mobil.harga)}<br/>
+
+                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal" onclick="editData(${mobil.id})">Edit</button>
+                          <button type="button" class="btn btn-danger" onclick="deleteData(${mobil.id})">Delete</button>
+                        </p>
+          </div>
+        </div>
+      </div>
+              `;
+
+              document.getElementById("cardContent").innerHTML = cardContent;
+            });
+
+            return;
+          }
+
+          cardContent += `
+          <div class="col">
+            <div class="card h-100" style="width: 18rem;">
+            <img src="${mobil.image}" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">${mobil.name}</h5>
+              <p class="card-text">${mobil.kapasitas}</p>
+              status : <a ${status}>${mobil.status}</a> <br/>
+              Harga Rental : ${numberWithCommas(mobil.harga)}<br/>
+
+                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal" onclick="editData(${mobil.id})">Edit</button>
+                          <button type="button" class="btn btn-danger" onclick="deleteData(${mobil.id})">Delete</button>
+                        </p>
+              
+            </div>
+          </div>
+        </div>
+          `;
+
+          document.getElementById("cardContent").innerHTML = cardContent;
+        });
+      }
+
+      function editData(id) {
+        const dataMobil = localStorage.getItem("dataMobil");
+        const data = JSON.parse(dataMobil);
+        const mobil = data.data.find((mobil) => mobil.id == id);
+
+        document.getElementById("id").value = mobil.id;
+        document.getElementById("name").value = mobil.name;
+        document.getElementById("kapasitas").value = mobil.kapasitas;
+        document.getElementById("harga").value = mobil.harga;
+        const status = mobil.status == "available" ? 0 : 1;
+
+        document.getElementById("status").selectedIndex = status;
+      }
+
+      async function saveEditData() {
+        const id = document.getElementById("id").value;
+        const name = document.getElementById("name").value;
+        const kapasitas = document.getElementById("kapasitas").value;
+        const harga = document.getElementById("harga").value;
+        const status = document.getElementById("status").value;
+
+        //get data from uploaded file
+        const image = document.getElementById("image").files[0];
+        let imageId = null;
+        if (image) {
+          imageId = await uploadedFile(image);
+        }
+
+        //move image to folder images/cars
+
+        let data = localStorage.getItem("dataMobil");
+        data = JSON.parse(data);
+
+        let mobil = data.data;
+        let indexMobil = data.data.findIndex((mobil) => mobil.id == id);
+
+        mobil[indexMobil].name = name == "" ? mobil[indexMobil].name : name;
+        mobil[indexMobil].kapasitas = kapasitas;
+        mobil[indexMobil].harga = harga < 0 ? mobil[indexMobil].harga : harga;
+        mobil[indexMobil].status =
+          status == "" ? mobil[indexMobil].status : status;
+        mobil[indexMobil].image =
+          imageId == null ? mobil[indexMobil].image : imageId;
+
+        mobil = {
+          data: mobil,
+        };
+
+        const oldImage = data.data[indexMobil].image;
+
+        if (
+          oldImage != imageId &&
+          Number.isInteger(oldImage) &&
+          imageId != null
+        ) {
+          console.log("delete old image");
+          //delete old image from indexedDB
+          var transaction = db.transaction("images", "readwrite");
+          var objectStore = transaction.objectStore("images");
+
+          let request = objectStore.delete(oldImage);
+
+          request.onsuccess = (event) => {
+            console.log("Image deleted");
+          };
+
+          request.onerror = (event) => {
+            console.log("Error deleting image");
+          };
+        }
+
+        localStorage.setItem("dataMobil", JSON.stringify(mobil));
+
+        editData(id);
+        showData();
+
+        //cleare form
+        document.getElementById("image").value = "";
+
+        //close modal
+        $("#exampleModal").modal("hide");
+
+        alert("Data berhasil diubah");
+      }
+
+      function deleteData(id) {
+        const dataMobil = localStorage.getItem("dataMobil");
+        const data = JSON.parse(dataMobil);
+
+        const mobil = data.data.filter((mobil) => mobil.id != id);
+
+        localStorage.setItem("dataMobil", JSON.stringify({ data: mobil }));
+        console.log("Data berhasil dihapus");
+        showData(true);
+      }
+
+      async function saveNewData() {
+        const name = document.getElementById("nameTambah").value;
+        const kapasitas = document.getElementById("kapasitasTambah").value;
+        const harga = document.getElementById("hargaTambah").value;
+        const status = document.getElementById("statusTambah").value;
+
+        //get data from uploaded file
+        const image = document.getElementById("imageTambah").files[0];
+        let imageId = null;
+        if (image) {
+          imageId = await uploadedFile(image);
+          console.log(imageId);
+        }
+
+        let data = await localStorage.getItem("dataMobil");
+        data = await JSON.parse(data);
+
+        if (data == null) {
+          data = {
+            data: [],
+          };
+        }
+        let mobil = data.data;
+
+        mobil.push({
+          id: mobil.length + 1,
+          name: name,
+          kapasitas: kapasitas,
+          harga: harga,
+          status: status,
+          image: imageId,
+        });
+
+        mobil = {
+          data: mobil,
+        };
+
+        localStorage.setItem("dataMobil", JSON.stringify(mobil));
+
+        showData();
+
+        //cleare form
+        document.getElementById("nameTambah").value = "";
+        document.getElementById("kapasitasTambah").value = "";
+        document.getElementById("hargaTambah").value = "";
+        document.getElementById("statusTambah").value = "";
+        document.getElementById("imageTambah").value = "";
+
+        //close modal
+        $("#modalTambah").modal("hide");
+
+        alert("Data berhasil ditambahkan");
+      }
+
+      function populateData() {
+        if (localStorage.getItem("dataMobil") == null) {
+          const data = [
+            {
+              id: 1,
+              name: "Toyota Avanza",
+              kapasitas: "7 penumpang",
+              harga: 400000,
+              status: "available",
+              image: "images/Avanza.jpg",
+            },
+            {
+              id: 2,
+              name: "Toyota Agya",
+              kapasitas: "5 penumpang",
+              harga: 250000,
+              status: "available",
+              image: "images/agya.png",
+            },
+            {
+              id: 3,
+              name: "Daihatsu Xenia",
+              kapasitas: "7 penumpang",
+              harga: 450000,
+              status: "available",
+              image: "images/xenia.jpg",
+            },
+            {
+              id: 4,
+              name: "Daihatsu Ayla",
+              kapasitas: "5 penumpang",
+              harga: 250000,
+              status: "available",
+              image: "images/ayla.jpg",
+            },
+            {
+              id: 5,
+              name: "Daihatsu Sigra",
+              kapasitas: "7 penumpang",
+              harga: 400000,
+              status: "available",
+              image: "images/sigra.png",
+            },
+            {
+              id: 6,
+              name: "Suzuki Ertiga",
+              kapasitas: "7 penumpang",
+              harga: 375000,
+              status: "available",
+              image: "images/ertiga.png",
+            },
+          ];
+
+          localStorage.setItem("dataMobil", JSON.stringify({ data: data }));
+        }
+      }
+
+      populateData();
+
+      showData();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+      crossorigin="anonymous"></script>
+
+</body>
+
+</html>

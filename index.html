@@ -198,6 +198,64 @@
           "splash-screen").style.display = "none";
       }, 3000);
     })
+      function populateData() {
+        if (localStorage.getItem("dataMobil") == null) {
+          const data = [
+            {
+              id: 1,
+              name: "Toyota Avanza",
+              kapasitas: "7 penumpang",
+              harga: 400000,
+              status: "available",
+              image: "images/Avanza.jpg",
+            },
+            {
+              id: 2,
+              name: "Toyota Agya",
+              kapasitas: "5 penumpang",
+              harga: 250000,
+              status: "available",
+              image: "images/agya.png",
+            },
+            {
+              id: 3,
+              name: "Daihatsu Xenia",
+              kapasitas: "7 penumpang",
+              harga: 450000,
+              status: "available",
+              image: "images/xenia.jpg",
+            },
+            {
+              id: 4,
+              name: "Daihatsu Ayla",
+              kapasitas: "5 penumpang",
+              harga: 250000,
+              status: "available",
+              image: "images/ayla.jpg",
+            },
+            {
+              id: 5,
+              name: "Daihatsu Sigra",
+              kapasitas: "7 penumpang",
+              harga: 400000,
+              status: "available",
+              image: "images/sigra.png",
+            },
+            {
+              id: 6,
+              name: "Suzuki Ertiga",
+              kapasitas: "7 penumpang",
+              harga: 375000,
+              status: "available",
+              image: "images/ertiga.png",
+            },
+          ];
+
+          localStorage.setItem("dataMobil", JSON.stringify({ data: data }));
+        }
+      }
+
+      populateData();
   </script>
 </body>
 
